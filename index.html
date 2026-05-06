@@ -846,37 +846,8 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(r => io.observe(r));
-
-  // Photo upload to gallery
-  document.getElementById('photoUpload').addEventListener('change', function(e) {
-    const files = Array.from(e.target.files);
-    const slots = document.querySelectorAll('.gallery-item');
-    let slotIdx = 0;
-
-    files.forEach(file => {
-      while (slotIdx < slots.length) {
-        const slot = slots[slotIdx];
-        const existingImg = slot.querySelector('img.loaded');
-        if (!existingImg) {
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            slot.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = ev.target.result;
-            img.className = 'loaded';
-            img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:6px;';
-            slot.appendChild(img);
-            slot.style.border = 'none';
-          };
-          reader.readAsDataURL(file);
-          slotIdx++;
-          break;
-        }
-        slotIdx++;
-      }
-    });
-  });
 </script>
+
 <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
