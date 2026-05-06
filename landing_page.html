@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grannies Project – Trefoil Guild Kenya</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy:      #12244E;
+    --navy-mid:  #1D3572;
+    --gold:      #C8972A;
+    --gold-lt:   #E8B84B;
+    --cream:     #FBF5E8;
+    --warm-white:#FFFCF5;
+    --terracotta:#B84B2A;
+    --text:      #1A1208;
+    --text-muted:#6B5B42;
+    --border:    rgba(200,151,42,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    background: rgba(18,36,78,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,151,42,0.2);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .nav-brand .badge {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700; font-size: 13px; color: var(--navy);
+    letter-spacing: 0.5px;
+  }
+  .nav-brand span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 600; color: #fff;
+    letter-spacing: 0.3px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: rgba(255,255,255,0.75);
+    font-size: 13.5px; font-weight: 500; letter-spacing: 0.4px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold-lt); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    border: none; padding: 9px 22px; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; letter-spacing: 0.3px; transition: background .2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--gold-lt); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200,151,42,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(29,53,114,0.8) 0%, transparent 70%);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      45deg,
+      #fff 0px, #fff 1px,
+      transparent 1px, transparent 24px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      #fff 0px, #fff 1px,
+      transparent 1px, transparent 24px
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; max-width: 820px;
+    padding: 0 5vw;
+    animation: fadeUp .9s ease both;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(200,151,42,0.15); border: 1px solid var(--border);
+    border-radius: 40px; padding: 6px 18px; margin-bottom: 28px;
+    color: var(--gold-lt); font-size: 12.5px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold-lt);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 92px);
+    font-weight: 700; line-height: 1.0;
+    color: #fff; margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+  h1 em { color: var(--gold-lt); font-style: italic; }
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.7);
+    line-height: 1.7; max-width: 560px; margin: 0 auto 40px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 14px 36px; border-radius: 5px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.4px;
+    text-decoration: none; transition: background .2s, transform .15s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 14px 36px; border-radius: 5px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.4px;
+    text-decoration: none; transition: border-color .2s, color .2s;
+  }
+  .btn-outline:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--gold);
+    padding: 28px 5vw;
+    display: flex; justify-content: center;
+    gap: clamp(24px, 5vw, 80px);
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 700; color: var(--navy);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; font-weight: 600; color: var(--navy);
+    letter-spacing: 0.8px; text-transform: uppercase; margin-top: 4px;
+    opacity: 0.75;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: clamp(64px, 8vw, 100px) 5vw; }
+
+  .section-label {
+    display: inline-block;
+    color: var(--gold); font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+    position: relative; padding-left: 20px;
+  }
+  .section-label::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 12px; height: 1.5px; background: var(--gold);
+    transform: translateY(-50%);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4.5vw, 52px);
+    font-weight: 700; line-height: 1.1; color: var(--navy);
+  }
+  h2 em { font-style: italic; color: var(--terracotta); }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; color: var(--navy);
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--cream); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .about-text .section-label { display: block; margin-bottom: 14px; }
+  .about-text h2 { margin-bottom: 22px; }
+  .about-text p {
+    font-size: 16px; line-height: 1.8; color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .about-visual {
+    background: var(--navy);
+    border-radius: 12px; padding: 40px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .guild-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: var(--gold-lt); letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .guild-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 700; color: #fff; line-height: 1.2;
+  }
+  .guild-body {
+    font-size: 14.5px; color: rgba(255,255,255,0.65); line-height: 1.75;
+  }
+  .guild-divider {
+    height: 1px; background: rgba(200,151,42,0.3);
+  }
+  .guild-meta { display: flex; gap: 24px; }
+  .meta-item { }
+  .meta-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 700; color: var(--gold-lt);
+  }
+  .meta-key {
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
+  /* ── PROBLEM / MISSION ── */
+  #mission {
+    background: var(--warm-white);
+    position: relative; overflow: hidden;
+  }
+  #mission::before {
+    content: ''; position: absolute; right: -100px; top: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,151,42,0.06) 0%, transparent 70%);
+  }
+  .mission-inner { max-width: 1100px; margin: 0 auto; }
+  .mission-header { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+  .mission-header h2 { margin-bottom: 16px; }
+  .mission-header p { font-size: 16px; color: var(--text-muted); line-height: 1.7; }
+  .challenge-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .challenge-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 32px 28px;
+    position: relative; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .challenge-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(18,36,78,0.1); }
+  .challenge-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .challenge-card:hover::after { transform: scaleX(1); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--navy); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 18px;
+    font-size: 22px;
+  }
+  .challenge-card h3 { margin-bottom: 10px; font-size: 19px; }
+  .challenge-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── ACTIVITIES ── */
+  #activities { background: var(--navy); position: relative; overflow: hidden; }
+  #activities::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, rgba(200,151,42,0.03) 0px, rgba(200,151,42,0.03) 1px,
+      transparent 1px, transparent 32px
+    );
+  }
+  .activities-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .activities-header { max-width: 540px; margin-bottom: 56px; }
+  .activities-header .section-label { color: var(--gold-lt); }
+  .activities-header h2 { color: #fff; }
+  .activity-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  .activity-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,151,42,0.15);
+    border-radius: 10px; padding: 28px;
+    display: flex; gap: 20px; align-items: flex-start;
+    transition: background .2s;
+  }
+  .activity-item:hover { background: rgba(255,255,255,0.08); }
+  .act-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 700; color: rgba(200,151,42,0.3);
+    line-height: 1; flex-shrink: 0; width: 36px;
+  }
+  .act-body h3 { color: #fff; margin-bottom: 8px; font-size: 18px; }
+  .act-body p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.7; }
+
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--cream); }
+  .achieve-inner { max-width: 1100px; margin: 0 auto; }
+  .achieve-header { text-align: center; max-width: 580px; margin: 0 auto 56px; }
+  .achieve-header h2 { margin-bottom: 14px; }
+  .achieve-header p { color: var(--text-muted); font-size: 16px; line-height: 1.7; }
+  .achieve-list {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .achieve-item {
+    background: var(--warm-white);
+    border-radius: 10px; padding: 28px;
+    border-left: 4px solid var(--gold);
+    transition: transform .2s;
+  }
+  .achieve-item:hover { transform: translateY(-3px); }
+  .achieve-check {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--gold); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 14px;
+    color: var(--navy); font-size: 14px; font-weight: 700;
+  }
+  .achieve-item h3 { font-size: 16px; color: var(--navy); margin-bottom: 6px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+  .achieve-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--warm-white); }
+  .gallery-inner { max-width: 1100px; margin: 0 auto; }
+  .gallery-header { max-width: 580px; margin-bottom: 48px; }
+  .gallery-header h2 { margin-bottom: 14px; }
+  .gallery-header p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+  .gallery-item {
+    border-radius: 8px; overflow: hidden;
+    background: var(--cream);
+    border: 2px dashed var(--border);
+    aspect-ratio: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; cursor: pointer;
+    transition: border-color .2s, transform .2s;
+    position: relative;
+  }
+  .gallery-item:hover { border-color: var(--gold); transform: scale(1.02); }
+  .gallery-item.large { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 280px; }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: none; /* shown when src is set */
+  }
+  .gallery-item img.loaded { display: block; }
+  .gallery-placeholder {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; padding: 20px;
+  }
+  .gallery-placeholder .icon {
+    font-size: 28px; opacity: 0.4;
+  }
+  .gallery-placeholder span {
+    font-size: 12px; color: var(--text-muted); text-align: center;
+    font-weight: 500;
+  }
+  .gallery-upload-btn {
+    margin-top: 28px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .gallery-note {
+    font-size: 13px; color: var(--text-muted);
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 6px; padding: 12px 18px;
+    line-height: 1.6; max-width: 480px; margin-top: 16px;
+  }
+
+  /* ── HOW TO HELP ── */
+  #help { background: var(--navy); position: relative; overflow: hidden; }
+  .help-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 80% 20%, rgba(200,151,42,0.08), transparent);
+  }
+  .help-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .help-header { text-align: center; max-width: 560px; margin: 0 auto 56px; }
+  .help-header .section-label { color: var(--gold-lt); }
+  .help-header h2 { color: #fff; margin-bottom: 14px; }
+  .help-header p { color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.7; }
+  .help-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .help-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,151,42,0.15);
+    border-radius: 10px; padding: 32px 24px;
+    text-align: center;
+    transition: background .25s, transform .2s;
+  }
+  .help-card:hover { background: rgba(200,151,42,0.12); transform: translateY(-4px); }
+  .help-icon {
+    font-size: 32px; margin-bottom: 16px; display: block;
+  }
+  .help-card h3 { color: var(--gold-lt); font-size: 20px; margin-bottom: 10px; }
+  .help-card p { color: rgba(255,255,255,0.55); font-size: 13.5px; line-height: 1.7; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--cream); }
+  .contact-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+  .contact-inner .section-label { margin-bottom: 14px; }
+  .contact-inner h2 { margin-bottom: 16px; }
+  .contact-inner p { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 44px; }
+  .contact-card {
+    background: var(--navy); border-radius: 12px; padding: 44px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    text-align: left;
+  }
+  .contact-item { }
+  .contact-label {
+    font-size: 11px; color: var(--gold-lt); letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 8px;
+  }
+  .contact-val {
+    font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.6;
+  }
+  .contact-val a { color: var(--gold-lt); text-decoration: none; }
+  .contact-val a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0A1630;
+    padding: 28px 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(200,151,42,0.15);
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: rgba(255,255,255,0.5);
+  }
+  .footer-brand strong { color: var(--gold-lt); }
+  .footer-right { font-size: 12.5px; color: rgba(255,255,255,0.35); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.9; }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid, .challenge-cards, .achieve-list, .help-cards { grid-template-columns: 1fr 1fr; }
+    .contact-card { grid-template-columns: 1fr; gap: 20px; }
+    .nav-links { display: none; }
+    .activity-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.large { grid-column: span 2; }
+  }
+  @media (max-width: 580px) {
+    .about-grid, .challenge-cards, .achieve-list, .help-cards { grid-template-columns: 1fr; }
+    .stats-strip { gap: 28px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">
+    <div class="badge">TGK</div>
+    <span>Grannies Project</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#help">Get Involved</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#help" class="nav-cta">Support Us</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Trefoil Guild Kenya · Est. 1998</div>
+    <h1>Empowering<br><em>Our Grandmothers</em></h1>
+    <p class="hero-sub">Dignifying the lives of vulnerable grandmothers in Kibra and beyond — through craft skills, economic independence, and community.</p>
+    <div class="hero-actions">
+      <a href="#help" class="btn-primary">Make a Difference</a>
+      <a href="#mission" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">1998</div>
+    <div class="stat-label">Founded</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6+</div>
+    <div class="stat-label">Key Achievements</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Kibra</div>
+    <div class="stat-label">Primary Location</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">SDGs</div>
+    <div class="stat-label">Aligned Programme</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <span class="section-label">Who We Are</span>
+      <h2>Inspiring Generations,<br><em>Building Communities</em></h2>
+      <p>Trefoil Guild Kenya is a vibrant branch of the Kenya Girl Guides Association. We foster lifelong commitment to the Guide Promise and Law, encouraging community service, mentorship, and continued engagement in Girl Guiding.</p>
+      <p>Members include Guide leaders who are not running Guide Units and are either pursuing studies or have changed jobs, alongside new associates aged 18 and above.</p>
+      <p>We actively support intergenerational mentorship, community development, and national initiatives aligned to WAGGGS values and the Sustainable Development Goals.</p>
+    </div>
+    <div class="about-visual">
+      <div class="guild-tag">The Trefoil Guild of Kenya</div>
+      <div class="guild-title">Kenya Girl Guides Association</div>
+      <p class="guild-body">A community united by the Guide Promise — working to leave the world better than we found it, one grandmother, one family, one neighbourhood at a time.</p>
+      <div class="guild-divider"></div>
+      <div class="guild-meta">
+        <div class="meta-item">
+          <div class="meta-val">1998</div>
+          <div class="meta-key">Year Formed</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">WAGGGS</div>
+          <div class="meta-key">Affiliation</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">Nairobi</div>
+          <div class="meta-key">Base</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission-inner">
+    <div class="mission-header reveal">
+      <span class="section-label">The Challenge</span>
+      <h2>Why the <em>Grannies Project</em> Matters</h2>
+      <p>Thousands of grandmothers across Nairobi's informal settlements are raising grandchildren alone — with no income, no support, and no voice. We exist to change that.</p>
+    </div>
+    <div class="challenge-cards">
+      <div class="challenge-card reveal">
+        <div class="card-icon">👵</div>
+        <h3>Skipped-Generation Caregiving</h3>
+        <p>These grandmothers have been left to care for grandchildren due to bereavement, abandonment, or social disruption — often with no warning and no resources.</p>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="card-icon">🏘️</div>
+        <h3>Vulnerability & Isolation</h3>
+        <p>Mostly aged women living in informal settlements like Kibra in Nairobi, facing poverty, social isolation, and limited access to public services.</p>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="card-icon">📉</div>
+        <h3>Lack of Income & Support</h3>
+        <p>Without income-generating skills or market access, they lack the means to provide for their grandchildren or maintain their own dignity and wellbeing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="activities-inner">
+    <div class="activities-header reveal">
+      <span class="section-label">What We Do</span>
+      <h2 style="color:#fff;">Our Key <em style="color:var(--gold-lt)">Activities</em></h2>
+    </div>
+    <div class="activity-grid">
+      <div class="activity-item reveal">
+        <div class="act-num">01</div>
+        <div class="act-body">
+          <h3>Skill Development</h3>
+          <p>We focus on improving crafts quality and design through individualized, hands-on training sessions tailored to each grandmother's skill level and interests.</p>
+        </div>
+      </div>
+      <div class="activity-item reveal">
+        <div class="act-num">02</div>
+        <div class="act-body">
+          <h3>Material Access</h3>
+          <p>Trefoil Guild Kenya provides affordable, quality materials for production — removing a key barrier to consistent and marketable output.</p>
+        </div>
+      </div>
+      <div class="activity-item reveal">
+        <div class="act-num">03</div>
+        <div class="act-body">
+          <h3>Market Linkages</h3>
+          <p>We facilitate sales through local markets, online platforms, Trefoil Guild Members, and the Kenya Girl Guides Headquarters shop in Nairobi.</p>
+        </div>
+      </div>
+      <div class="activity-item reveal">
+        <div class="act-num">04</div>
+        <div class="act-body">
+          <h3>Financial Education</h3>
+          <p>We provide training in basic financial literacy, pricing, and business management — giving grannies the knowledge to grow their craft into a sustainable livelihood.</p>
+        </div>
+      </div>
+      <div class="activity-item reveal">
+        <div class="act-num">05</div>
+        <div class="act-body">
+          <h3>Christmas Gift Baskets</h3>
+          <p>Every year we bring joy to grannies and their grandchildren through curated Christmas gift baskets — a moment of care, community, and celebration.</p>
+        </div>
+      </div>
+      <div class="activity-item reveal">
+        <div class="act-num">06</div>
+        <div class="act-body">
+          <h3>Community Cohesion</h3>
+          <p>Beyond the crafts, we build lasting social bonds — creating a network of mutual support, mentorship, and shared purpose among the grannies and the Guild.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="achieve-inner">
+    <div class="achieve-header reveal">
+      <span class="section-label">Our Impact</span>
+      <h2>What We've <em>Achieved</em></h2>
+      <p>Through persistent effort and community trust, the Grannies Project has produced measurable and lasting change in the lives of its beneficiaries.</p>
+    </div>
+    <div class="achieve-list">
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Increased Income</h3>
+        <p>Project beneficiaries are earning more through improved craft production and access to new markets.</p>
+      </div>
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Improved Product Quality</h3>
+        <p>Training has raised the standard and marketability of craft items, opening doors to premium buyers and exhibitions.</p>
+      </div>
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Established Market Linkages</h3>
+        <p>Strong sales channels now connect grannies to customers locally, nationally, and online.</p>
+      </div>
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Financial Literacy</h3>
+        <p>Grannies now manage their own pricing, savings, and simple business operations with confidence.</p>
+      </div>
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Strengthened Social Bonds</h3>
+        <p>Community cohesion and mutual support networks have been rebuilt among previously isolated women.</p>
+      </div>
+      <div class="achieve-item reveal">
+        <div class="achieve-check">✓</div>
+        <h3>Diversified Craft Range</h3>
+        <p>The range of craft items produced has grown — beadwork, woven baskets, crocheted goods, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header reveal">
+      <span class="section-label">In the Field</span>
+      <h2>Photo <em>Gallery</em></h2>
+      <p>A window into the lives, laughter, and labour of the grandmothers we serve. Photos can be added here to showcase project activities, craft work, and community moments.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Large feature slot -->
+      <div class="gallery-item large" data-slot="1">
+        <div class="gallery-placeholder">
+          <div class="icon">🖼️</div>
+          <span>Feature Photo<br><small style="opacity:.6">Recommended: 800×600px</small></span>
+        </div>
+      </div>
+      <!-- Regular slots -->
+      <div class="gallery-item" data-slot="2">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 2</span></div>
+      </div>
+      <div class="gallery-item" data-slot="3">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 3</span></div>
+      </div>
+      <div class="gallery-item" data-slot="4">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 4</span></div>
+      </div>
+      <div class="gallery-item" data-slot="5">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 5</span></div>
+      </div>
+      <div class="gallery-item" data-slot="6">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 6</span></div>
+      </div>
+      <div class="gallery-item" data-slot="7">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 7</span></div>
+      </div>
+      <div class="gallery-item" data-slot="8">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 8</span></div>
+      </div>
+      <div class="gallery-item" data-slot="9">
+        <div class="gallery-placeholder"><div class="icon">📷</div><span>Photo 9</span></div>
+      </div>
+    </div>
+    <div class="gallery-upload-btn reveal">
+      <label style="cursor:pointer;">
+        <input type="file" id="photoUpload" accept="image/*" multiple style="display:none;" />
+        <span class="btn-primary" style="display:inline-block; font-size:13px;">+ Add Photos</span>
+      </label>
+    </div>
+    <div class="gallery-note">
+      📌 <strong>Add Photos:</strong> Replace placeholder slots with real &lt;img&gt; tags. Recommended format: JPEG/WebP, 4:3 ratio. The feature slot (top-left, 2×2) works best with a wide group or action shot.
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section id="help">
+  <div class="help-bg"></div>
+  <div class="help-inner">
+    <div class="help-header reveal">
+      <span class="section-label">Get Involved</span>
+      <h2>Join Us in Making<br>a <em style="color:var(--gold-lt)">Difference</em></h2>
+      <p>There are many ways to walk alongside the grannies — pick the one that fits your capacity and passion.</p>
+    </div>
+    <div class="help-cards">
+      <div class="help-card reveal">
+        <span class="help-icon">🎁</span>
+        <h3>Donate</h3>
+        <p>Support kits, training materials, and feeding programmes that keep the project running day-to-day.</p>
+      </div>
+      <div class="help-card reveal">
+        <span class="help-icon">🤝</span>
+        <h3>Volunteer</h3>
+        <p>Offer your time, skills, and mentoring support. Even a few hours can transform a grandmother's trajectory.</p>
+      </div>
+      <div class="help-card reveal">
+        <span class="help-icon">🌐</span>
+        <h3>Partner</h3>
+        <p>Collaborate on capacity building and funding. NGOs, corporates, and institutions are welcome.</p>
+      </div>
+      <div class="help-card reveal">
+        <span class="help-icon">⭐</span>
+        <h3>Sponsor</h3>
+        <p>Back events, buy the grannies' products, set up a grannies' shop, or fund a skill programme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="section-label">Reach Out</span>
+    <h2>Get in Touch with<br><em>Trefoil Guild Kenya</em></h2>
+    <p>We'd love to hear from you — whether you're a donor, volunteer, partner, or simply someone who cares about the grannies.</p>
+    <div class="contact-card reveal">
+      <div class="contact-item">
+        <div class="contact-label">Organisation</div>
+        <div class="contact-val">Kenya Girl Guides Association<br>Trefoil Guild Kenya</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-val"><a href="mailto:trefoil.guildkgga@gmail.com">trefoil.guildkgga@gmail.com</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Address</div>
+        <div class="contact-val">Arboretum Road, Off State House Rd<br>P.O Box 40004 – 00100, Nairobi, Kenya</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Project</div>
+        <div class="contact-val">Grannies Community Project<br>Inspiring Generations, Building Communities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <strong>Grannies Project</strong> · Trefoil Guild Kenya
+  </div>
+  <div class="footer-right">© 2025 Kenya Girl Guides Association. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+
+  // Photo upload to gallery
+  document.getElementById('photoUpload').addEventListener('change', function(e) {
+    const files = Array.from(e.target.files);
+    const slots = document.querySelectorAll('.gallery-item');
+    let slotIdx = 0;
+
+    files.forEach(file => {
+      while (slotIdx < slots.length) {
+        const slot = slots[slotIdx];
+        const existingImg = slot.querySelector('img.loaded');
+        if (!existingImg) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            slot.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = ev.target.result;
+            img.className = 'loaded';
+            img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:6px;';
+            slot.appendChild(img);
+            slot.style.border = 'none';
+          };
+          reader.readAsDataURL(file);
+          slotIdx++;
+          break;
+        }
+        slotIdx++;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
